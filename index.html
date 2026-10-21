@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f2ea">
+<title>ÉTERNEL — Wedding Screen</title>
+<style>
+:root{color-scheme:light;--bg:#f7f3ed;--panel:#fffdf9;--line:#e6ddd1;--muted:#8e8174;--text:#30271f;--accent:#a98358;--accent2:#c4a47c}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{background:radial-gradient(ellipse at 50% -25%,#fffdf9 0,transparent 60%),var(--bg)}
+button,input{font:inherit}button{cursor:pointer;color:inherit}
+.app{min-height:100vh;display:flex;flex-direction:column}
+header{height:76px;padding:0 clamp(16px,3vw,42px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e6ddd1;background:#fbf8f2e8;backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:13px}.mark{width:38px;height:38px;border:1px solid #bfa36c;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:21px}.brand-name{font-family:Georgia,"Times New Roman",serif;font-size:17px;font-weight:500;letter-spacing:.24em}.brand-sub{font-size:10px;letter-spacing:.18em;color:var(--muted);margin-top:4px}.header-actions{display:flex;align-items:center;gap:10px}
+.pill{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#766858;border:1px solid var(--line);border-radius:999px;padding:9px 12px}
+.btn{border:1px solid var(--line);background:#fffdf9;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:700;transition:.18s}.btn:hover{border-color:#b69a78;background:#f3ece2}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fffdf9}.btn.primary:hover{background:var(--accent2);color:#fff}.btn.small{padding:7px 10px;font-size:11px}.btn:disabled{opacity:.35;cursor:not-allowed}
+main{width:min(1500px,100%);margin:auto;padding:clamp(16px,3vw,38px);display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,.8fr);gap:22px;flex:1}
+.left{min-width:0}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase}.headline{font-family:Georgia,"Times New Roman",serif;font-size:clamp(27px,3.2vw,43px);font-weight:400;letter-spacing:-.035em;margin:9px 0 7px;color:#4c3829}.subhead{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 22px}
+.screen-wrap{position:relative;background:#17110d;border:1px solid #e4d8c8;border-radius:17px;overflow:hidden;box-shadow:0 24px 70px #8d74531a;aspect-ratio:16/9;display:grid;place-items:center}
+video{width:100%;height:100%;object-fit:contain;background:#020306;display:block}
+.screen-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(ellipse at center,#f6eee2 0,#e8dccb 70%)}
+.screen-empty.hidden{display:none}.empty-icon{width:64px;height:64px;margin:0 auto 18px;border:1px solid #b89a74;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:27px}.empty-title{font-size:17px;font-weight:700}.empty-text{max-width:370px;color:var(--muted);font-size:12px;line-height:1.7;margin:8px auto 18px}
+.screen-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.screen-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:#070a10b8;border:1px solid #ffffff22;border-radius:999px;padding:8px 10px;backdrop-filter:blur(10px)}.live-dot{display:inline-block;width:6px;height:6px;background:#a8d8ae;border-radius:50%;margin-right:7px;box-shadow:0 0 12px #9cdda2}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 0 0}.control-group{display:flex;align-items:center;gap:8px}.control-spacer{flex:1}.status{font-size:11px;color:var(--muted);white-space:nowrap}.toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fffdf9;padding:9px 11px;border-radius:10px;font-size:11px;color:#d5dbea}.toggle input{accent-color:var(--accent);width:14px;height:14px}
+.progress-card{margin-top:17px;border:1px solid var(--line);border-radius:13px;padding:14px 16px;background:#fffdf9}.progress-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.track-title{font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.track-sub{font-size:10px;color:var(--muted);margin-top:4px}.time{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}.bar{height:4px;border-radius:9px;background:#e9dfd3;overflow:hidden}.bar-fill{height:100%;width:0;background:var(--accent);transition:width .15s linear}
+.side{min-width:0;display:flex;flex-direction:column;gap:15px}.panel{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#fffdf9,#f7f1e8);overflow:hidden}.panel-head{display:flex;justify-content:space-between;align-items:center;padding:17px 17px 13px;border-bottom:1px solid #eee5d9}.panel-title{font-size:13px;font-weight:800;letter-spacing:.02em}.panel-meta{font-size:10px;color:var(--muted);margin-top:4px}.panel-body{padding:15px 17px}.upload-zone{border:1px dashed #cbbba6;border-radius:12px;padding:18px 12px;text-align:center;background:#fffaf3;transition:.2s}.upload-zone.drag{border-color:var(--accent);background:#a983580d}.upload-symbol{font-size:23px;color:var(--accent);margin-bottom:7px}.upload-title{font-size:12px;font-weight:700}.upload-help{font-size:10px;color:var(--muted);line-height:1.6;margin:5px 0 12px}.upload-actions{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+.file-note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:10px}.playlist-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.playlist{display:flex;flex-direction:column;gap:7px;max-height:300px;overflow:auto;padding-right:2px}.empty-list{padding:20px 10px;text-align:center;color:var(--muted);font-size:11px;line-height:1.7;border:1px dashed #d8caba;border-radius:10px}
+.track{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid transparent;background:#f9f4ed;border-radius:10px;min-width:0}.track.active{border-color:#bda17d;background:#f8f0e5}.track-num{width:25px;height:25px;border-radius:7px;background:#eee5d9;display:grid;place-items:center;color:#b6c0d1;font-size:10px;flex-shrink:0}.track.active .track-num{background:var(--accent);color:#fffdf9}.track-info{min-width:0;flex:1}.track-name{font-size:11px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-size{font-size:10px;color:var(--muted);margin-top:4px}.track button{border:0;background:transparent;color:#9c8e7e;padding:5px;font-size:14px}.track button:hover{color:#fff}.footer-note{font-size:10px;color:#8e8174;line-height:1.7;padding:2px 3px}
+input[type=file]{display:none}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#a98358;color:#fffdf9;border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;box-shadow:0 12px 35px #0008;transition:.25s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){main{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;align-items:start}.side .panel:nth-child(2){grid-row:span 2}.headline{font-size:30px}}
+@media(max-width:580px){header{height:65px}.pill{display:none}main{padding:16px;gap:18px}.side{display:flex}.controls{gap:7px}.control-spacer{display:none}.controls .btn{flex:1}.status{width:100%;order:5}.screen-wrap{border-radius:12px}.panel-head{padding:14px}.panel-body{padding:13px}.headline{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="mark">❦</div><div><div class="brand-name">ÉTERNEL</div><div class="brand-sub">WEDDING FILM & MUSIC</div></div></div>
+  <div class="header-actions"><span class="pill">Wedding edition · Private playback</span><button class="btn small" id="fullscreenBtn">⛶ Toàn màn hình</button></div>
+</header>
+<main>
+<section class="left">
+  <div class="eyebrow">A celebration of love</div>
+  <h1 class="headline">Một ngày đẹp, một tình yêu mãi mãi.</h1>
+  <p class="subhead">Không gian trình chiếu dành riêng cho ngày trọng đại — tinh tế, ấm áp và tối giản để mọi ánh nhìn hướng về câu chuyện của cô dâu chú rể.</p>
+  <div class="screen-wrap" id="screenWrap">
+    <video id="video" playsinline preload="metadata" muted loop></video>
+    <div class="screen-empty" id="screenEmpty"><div><div class="empty-icon">❦</div><div class="eyebrow" style="margin-bottom:10px">The Wedding Film</div><div class="empty-title" style="font-family:Georgia,serif;font-weight:400;font-size:clamp(22px,3vw,34px);letter-spacing:.02em">Cô dâu & Chú rể</div><div class="empty-text">Hãy chọn video cưới để bắt đầu khoảnh khắc đáng nhớ của hai bạn.</div><button class="btn primary" id="emptyVideoBtn">＋ Chọn video cưới</button></div></div>
+    
+  </div>
+  <div class="controls">
+    <div class="control-group"><button class="btn primary" id="playBtn">▶ Phát trình chiếu</button><button class="btn" id="pauseBtn">Ⅱ Tạm dừng</button></div>
+    <div class="control-spacer"></div>
+    <label class="toggle"><input id="muteVideo" type="checkbox" checked> Tắt tiếng video</label>
+    <label class="toggle"><input id="loopVideo" type="checkbox" checked> Lặp video</label>
+    <span class="status" id="playStatus">Sẵn sàng</span>
+  </div>
+  <div class="progress-card">
+    <div class="progress-head"><div style="min-width:0"><div class="track-title" id="nowPlaying">Chưa có bài nhạc nào</div><div class="track-sub" id="musicStatus">Danh sách nhạc sẽ tự phát lần lượt</div></div><div class="time" id="musicTime">00:00 / 00:00</div></div>
+    <div class="bar"><div class="bar-fill" id="musicProgress"></div></div>
+    <div class="controls" style="padding-top:12px">
+      <button class="btn small" id="prevBtn">Ⅱ◀ Trước</button><button class="btn small" id="musicPlayBtn">▶ Nhạc</button><button class="btn small" id="nextBtn">Tiếp ▶Ⅱ</button>
+      <div class="control-spacer"></div><label class="toggle"><input id="loopPlaylist" type="checkbox" checked> Lặp danh sách nhạc</label>
+    </div>
+  </div>
+</section>
+<aside class="side">
+  <section class="panel">
+    <div class="panel-head"><div><div class="panel-title">01 / Phim cưới</div><div class="panel-meta">Chọn video cô dâu chú rể</div></div><span style="color:var(--accent)">▣</span></div>
+    <div class="panel-body">
+      <div class="upload-zone" id="videoDrop">
+        <div class="upload-symbol">↥</div><div class="upload-title">Thả phim cưới vào đây</div><div class="upload-help">MP4 · WebM · MOV (tùy trình duyệt và codec)</div>
+        <div class="upload-actions"><button class="btn small" id="chooseVideoBtn">Chọn video</button><button class="btn small" id="clearVideoBtn">Gỡ video</button></div>
+      </div>
+      <div class="file-note" id="videoInfo">Chưa chọn video. Chất lượng phát giữ nguyên theo tệp nguồn và khả năng giải mã của trình duyệt.</div>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><div><div class="panel-title">02 / Nhạc nền</div><div class="panel-meta" id="playlistMeta">0 bài · Phát tuần tự</div></div><span style="color:var(--accent)">♫</span></div>
+    <div class="panel-body">
+      <div class="upload-zone" id="musicDrop" style="padding:14px 10px">
+        <div class="upload-symbol">♫</div><div class="upload-title">Thả danh sách nhạc cưới vào đây</div><div class="upload-help">MP3 · WAV · M4A · AAC · OGG (tùy trình duyệt)</div>
+        <div class="upload-actions"><button class="btn small" id="chooseMusicBtn">＋ Thêm nhạc</button><button class="btn small" id="clearMusicBtn">Xóa danh sách</button></div>
+      </div>
+      <div class="playlist-top" style="margin-top:15px"><span class="panel-meta">PLAY QUEUE</span><button class="btn small" id="shuffleBtn">Trộn bài</button></div>
+      <div class="playlist" id="playlist"><div class="empty-list">Danh sách đang trống.<br>Thêm các tệp nhạc để phát lần lượt.</div></div>
+      <div class="file-note">Khi một bài kết thúc, bài tiếp theo tự phát. Hết danh sách sẽ quay lại bài đầu nếu bật “Lặp danh sách nhạc”.</div>
+    </div>
+  </section>
+  <div class="footer-note">Gợi ý: nhấn <b>Toàn màn hình</b> để chiếu lên màn hình lớn. Hãy bấm Phát một lần để cho phép nhạc nền hoạt động.</div>
+</aside>
+</main>
+<input type="file" id="videoInput" accept="video/*">
+<input type="file" id="musicInput" accept="audio/*" multiple>
+<audio id="audio" preload="metadata"></audio>
+<div class="toast" id="toast"></div>
+</div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const video = $('video'), audio = $('audio');
+  let videoUrl = null, tracks = [], current = -1, toastTimer = null;
+  const formatTime = n => { if (!Number.isFinite(n) || n < 0) n = 0; const s=Math.floor(n); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); };
+  const prettySize = n => n < 1048576 ? (n/1024).toFixed(0)+' KB' : (n/1048576).toFixed(1)+' MB';
+  function toast(message){ const el=$('toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2400); }
+  function updateVideoFlags(){ video.muted=$('muteVideo').checked; video.loop=$('loopVideo').checked; }
+  function loadVideo(file){
+    if(!file || !file.type.startsWith('video/')){toast('Chọn một tệp video hợp lệ nhé.');return;}
+    if(videoUrl) URL.revokeObjectURL(videoUrl);
+    videoUrl=URL.createObjectURL(file); video.src=videoUrl; video.load(); video.muted=$('muteVideo').checked; video.loop=$('loopVideo').checked;
+    $('screenEmpty').classList.add('hidden'); $('videoInfo').textContent=`${file.name} · ${prettySize(file.size)} · Phát trực tiếp từ tệp gốc, không chuyển mã.`;
+    $('playStatus').textContent='Đã tải video'; updateVideoFlags(); toast('Đã tải video trình chiếu.');
+  }
+  function addMusic(files){
+    const valid=[...files].filter(f=>f.type.startsWith('audio/') || /\.(mp3|wav|m4a|aac|ogg|flac|opus)$/i.test(f.name));
+    if(!valid.length){toast('Không tìm thấy tệp nhạc hợp lệ.');return;}
+    valid.forEach(file=>tracks.push({file,url:URL.createObjectURL(file)}));
+    renderPlaylist(); if(current<0) playTrack(0,false); toast(`Đã thêm ${valid.length} bài nhạc.`);
+  }
+  function renderPlaylist(){
+    $('playlistMeta').textContent=`${tracks.length} bài · Phát tuần tự`;
+    const list=$('playlist'); list.innerHTML='';
+    if(!tracks.length){list.innerHTML='<div class="empty-list">Danh sách đang trống.<br>Thêm các tệp nhạc để phát lần lượt.</div>';return;}
+    tracks.forEach((t,i)=>{
+      const row=document.createElement('div'); row.className='track'+(i===current?' active':'');
+      const num=document.createElement('div'); num.className='track-num'; num.textContent=i===current?'♫':String(i+1).padStart(2,'0');
+      const info=document.createElement('div'); info.className='track-info';
+      const name=document.createElement('div'); name.className='track-name'; name.textContent=t.file.name; name.title=t.file.name;
+      const size=document.createElement('div'); size.className='track-size'; size.textContent=prettySize(t.file.size);
+      info.append(name,size);
+      const play=document.createElement('button'); play.title='Phát bài này'; play.textContent='▶'; play.setAttribute('aria-label','Phát '+t.file.name); play.onclick=()=>playTrack(i,true);
+      const remove=document.createElement('button'); remove.title='Xóa bài'; remove.textContent='×'; remove.setAttribute('aria-label','Xóa '+t.file.name); remove.onclick=()=>removeTrack(i);
+      row.append(num,info,play,remove); list.append(row);
+    });
+  }
+  async function playTrack(index,shouldPlay=true){
+    if(!tracks.length){current=-1;renderPlaylist();updateMusicUI();return;}
+    if(index<0 || index>=tracks.length) return;
+    current=index; audio.src=tracks[current].url; audio.load(); renderPlaylist(); updateMusicUI();
+    if(shouldPlay){try{await audio.play();$('musicPlayBtn').textContent='Ⅱ Tạm dừng nhạc';}catch(e){$('musicStatus').textContent='Bấm “Nhạc” để cho phép phát âm thanh.';toast('Trình duyệt cần thao tác bấm để phát nhạc.');}}
+  }
+  function updateMusicUI(){
+    $('nowPlaying').textContent=current>=0&&tracks[current]?tracks[current].file.name:'Chưa có bài nhạc nào';
+    $('musicStatus').textContent=current>=0?`Bài ${current+1} / ${tracks.length} · Phát tuần tự`:'Danh sách nhạc sẽ tự phát lần lượt';
+    $('musicPlayBtn').textContent=audio.paused?'▶ Nhạc':'Ⅱ Tạm dừng nhạc';
+  }
+  function removeTrack(i){
+    const wasCurrent=i===current, removed=tracks[i]; URL.revokeObjectURL(removed.url); tracks.splice(i,1);
+    if(!tracks.length){audio.pause();audio.removeAttribute('src');current=-1;}
+    else if(i<current) current--;
+    else if(wasCurrent){current=-1;playTrack(Math.min(i,tracks.length-1),!audio.paused);}
+    renderPlaylist();updateMusicUI();
+  }
+  function clearMusic(){audio.pause();tracks.forEach(t=>URL.revokeObjectURL(t.url));tracks=[];current=-1;audio.removeAttribute('src');audio.load();renderPlaylist();updateMusicUI();$('musicProgress').style.width='0%';$('musicTime').textContent='00:00 / 00:00';toast('Đã xóa danh sách nhạc.');}
+  $('videoInput').addEventListener('change',e=>{loadVideo(e.target.files[0]);e.target.value='';});
+  $('musicInput').addEventListener('change',e=>{addMusic(e.target.files);e.target.value='';});
+  $('chooseVideoBtn').onclick=$('emptyVideoBtn').onclick=()=>$('videoInput').click();
+  $('chooseMusicBtn').onclick=()=>$('musicInput').click();
+  $('clearVideoBtn').onclick=()=>{video.pause();video.removeAttribute('src');video.load();if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=null;$('screenEmpty').classList.remove('hidden');$('videoInfo').textContent='Chưa chọn video. Chất lượng phát giữ nguyên theo tệp nguồn và khả năng giải mã của trình duyệt.';$('playStatus').textContent='Sẵn sàng';};
+  $('clearMusicBtn').onclick=clearMusic;
+  $('muteVideo').onchange=updateVideoFlags; $('loopVideo').onchange=()=>{video.loop=$('loopVideo').checked;updateVideoFlags();};
+  $('playBtn').onclick=async()=>{let ok=false;if(video.src){try{await video.play();ok=true;}catch(e){toast('Không thể phát video này trong trình duyệt.');}}if(tracks.length){try{await audio.play();ok=true;}catch(e){$('musicStatus').textContent='Bấm “Nhạc” để cho phép phát âm thanh.';}}if(ok){$('playStatus').textContent='Đang trình chiếu';updateMusicUI();}else toast('Hãy thêm video hoặc danh sách nhạc trước.');};
+  $('pauseBtn').onclick=()=>{video.pause();audio.pause();$('playStatus').textContent='Đã tạm dừng';updateMusicUI();};
+  $('musicPlayBtn').onclick=async()=>{if(!tracks.length){$('musicInput').click();return;}if(audio.paused){if(current<0)await playTrack(0,true);else try{await audio.play();}catch(e){toast('Không thể phát bài nhạc này.');}}else audio.pause();updateMusicUI();};
+  $('prevBtn').onclick=()=>{if(!tracks.length)return;playTrack((current-1+tracks.length)%tracks.length,true);};
+  $('nextBtn').onclick=()=>{if(!tracks.length)return;playTrack((current+1)%tracks.length,true);};
+  audio.addEventListener('ended',()=>{if(!tracks.length)return;if(current<tracks.length-1)playTrack(current+1,true);else if($('loopPlaylist').checked)playTrack(0,true);else{$('musicStatus').textContent='Đã phát hết danh sách';updateMusicUI();}});
+  audio.addEventListener('timeupdate',()=>{const d=audio.duration||0; $('musicProgress').style.width=d?`${audio.currentTime/d*100}%`:'0%';$('musicTime').textContent=`${formatTime(audio.currentTime)} / ${formatTime(d)}`;});
+  audio.addEventListener('play',updateMusicUI);audio.addEventListener('pause',updateMusicUI);
+  $('fullscreenBtn').onclick=async()=>{const target=$('screenWrap');try{if(!document.fullscreenElement)await target.requestFullscreen();else await document.exitFullscreen();}catch(e){toast('Trình duyệt không cho phép toàn màn hình.');}};
+  function setupDrop(zone,accept,callback){
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
+    zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+    zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag');const files=[...e.dataTransfer.files];callback(files.filter(f=>accept(f)));});
+  }
+  setupDrop($('videoDrop'),f=>f.type.startsWith('video/'),fs=>{if(fs[0])loadVideo(fs[0]);else toast('Hãy thả một tệp video.');});
+  setupDrop($('musicDrop'),f=>f.type.startsWith('audio/')||/\.(mp3|wav|m4a|aac|ogg|flac|opus)$/i.test(f.name),addMusic);
+  $('screenWrap').addEventListener('dragover',e=>e.preventDefault());
+  $('screenWrap').addEventListener('drop',e=>{e.preventDefault();const f=[...e.dataTransfer.files].find(x=>x.type.startsWith('video/'));if(f)loadVideo(f);});
+  $('shuffleBtn').onclick=()=>{if(tracks.length<2)return;const playing= !audio.paused;const active=tracks[current];for(let i=tracks.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[tracks[i],tracks[j]]=[tracks[j],tracks[i]];}current=tracks.indexOf(active);renderPlaylist();if(playing)playTrack(current,true);toast('Đã trộn danh sách nhạc.');};
+  video.addEventListener('error',()=>{if(video.src)toast('Định dạng hoặc codec video này có thể chưa được trình duyệt hỗ trợ.');});
+  audio.addEventListener('error',()=>{if(audio.src)toast('Không đọc được tệp nhạc này; thử định dạng MP3 hoặc WAV.');});
+  updateVideoFlags();renderPlaylist();updateMusicUI();
+})();
+</script>
+</body>
+</html>
